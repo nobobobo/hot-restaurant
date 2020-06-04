@@ -69,7 +69,7 @@
   
   <script type="text/javascript">
     $.get("/api/reserve",function(data){
-        console.log(data);
+        console.log(data); 
         $.each(data, function (index, table) {
             let listItem = $(`<li class="list-group-item mt-4">`);
             let tableCard = `<h2>Table# ${index} </h2>
