@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+          <h1>Hot Restaurant</h1>
+          <h3>Make your reservation</h3>
+          <hr>
+          <a href="tables"><button class="btn btn-primary btn-lg" id="viewTablesButton"><span class="fa fa-plus"></span> View Tables</button></a>
+          <a href="/"><button class="btn btn-danger btn-lg" id="homeIconButton"><span
+                class="fa fa-home"></span></button></a>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Name</label>
+                <input type="text" class="form-control" id="nameInput" >
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Phone Number</label>
+                <input type="text" class="form-control" id="phoneNumberInput" >
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Email</label>
+                <input type="email" class="form-control" id="emailInput" >
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Unique ID</label>
+                <input type="text" class="form-control" id="uniqueIDInput" >
+              </div>
+              <button type="button" class="btn btn-primary" id="submitButton" value="Submit">Submit</button>
+        </form>
+        <footer class="footer mt-4">
+          <div class="container">
+            <p>Control Panel</p>
+            <p><a href="#" id="clear">Clear Table</a> | <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API
+                Wait List</a>
+          </p></div>
+        </footer>
+    </div>
+
+    <script type="text/javascript">
+    $("#submitButton").on("click", function(event) {
+      event.preventDefault();
+      var newTable = {
+        customerName: $("#nameInput").val().trim(),
+        customerEmail: $("#emailInput").val().trim(),
+        phoneNumber: $("#phoneNumberInput").val().trim(),
+        customerID: $("#uniqueIDInput").val().trim()
+      };
+
+      $.post("/api/addtable", newTable).then( function(data){
+        console.log(data.toString());
+      });
+    })
+
+   </script>
+
+</body>
+</html>
